@@ -4,6 +4,8 @@ import { PhilosophySection } from "@/components/philosophy-section"
 import { TestimonialsSection } from "@/components/testimonials-with-marquee"
 import { SpecialText } from "@/components/ui/special-text"
 import { HeroContent } from "@/components/hero-content"
+import { featuredProjects } from "@/lib/projects"
+import Link from "next/link"
 
 const services = [
   {
@@ -21,51 +23,6 @@ const services = [
   {
     name: "Creative Direction",
     description: "Art direction across campaigns, identity extensions, and launch-ready visual execution.",
-  },
-]
-
-const projects = [
-  {
-    title: "Meghalaya Travel",
-    meta: "Brand Identity / Web Design",
-    year: "2024",
-    image: "/images/projects/lumen-studio/cover.png",
-    href: "/project-lumen-studio.html",
-  },
-  {
-    title: "Gobblin Cafe",
-    meta: "Editorial / Architecture",
-    year: "2024",
-    image: "/images/projects/void-arch/cover.png",
-    href: "/project-void-arch.html",
-  },
-  {
-    title: "Kshetri Industries",
-    meta: "E-Commerce / Product",
-    year: "2024",
-    image: "/images/projects/noir-objects/cover.png",
-    href: "/project-noir-objects.html",
-  },
-  {
-    title: "Himalayan Rides",
-    meta: "Interactive / Cinematography",
-    year: "2024",
-    image: "/images/projects/the-silence/cover.png",
-    href: "/project-the-silence.html",
-  },
-  {
-    title: "Kshetri Control",
-    meta: "Platform Design",
-    year: "2024",
-    image: "/images/projects/tide-digital/cover.png",
-    href: "/project-tide-digital.html",
-  },
-  {
-    title: "Magic Mountain Adventures",
-    meta: "Editorial / Branding",
-    year: "2024",
-    image: "/images/projects/facade/cover.png",
-    href: "/project-facade.html",
   },
 ]
 
@@ -203,11 +160,11 @@ export default function Page() {
               <h2 className="text-2xl font-bold uppercase tracking-tight text-white md:text-4xl">
                 Selected Projects
               </h2>
-              <p className="text-xs tracking-[0.2em] text-zinc-400">01 — 04</p>
+              <p className="text-xs tracking-[0.2em] text-zinc-400">{`01 — ${String(featuredProjects.length).padStart(2, "0")}`}</p>
             </div>
 
             <div className="space-y-8 md:space-y-10">
-              {projects.map((project, index) => (
+              {featuredProjects.map((project, index) => (
                 <article key={project.title} className="w-full">
                   <FeatureSpotlight
                     src={project.image}
@@ -216,11 +173,20 @@ export default function Page() {
                     indexLabel={String(index + 1).padStart(2, "0")}
                     heading={project.title}
                     subheading={`${project.meta} • ${project.year}`}
-                    description="Minimal, high-contrast project showcase with cinematic visual emphasis."
+                    description={project.summary}
                     exploreLabel="Explore Project"
                   />
                 </article>
               ))}
+            </div>
+
+            <div className="mt-10 flex justify-end">
+              <Link
+                href="/projects"
+                className="border border-white/35 px-5 py-3 text-[11px] tracking-[0.2em] text-white transition hover:bg-white hover:text-black"
+              >
+                VIEW ALL PROJECTS
+              </Link>
             </div>
           </section>
 
