@@ -22,7 +22,7 @@ export default function ProjectsPage() {
         </div>
 
         <p className="mb-12 max-w-2xl text-sm leading-relaxed text-zinc-400 md:text-base">
-          This page is powered by shared project data. Add or edit entries in lib/projects.ts and both this page and the homepage update automatically.
+          All the projects we have published. Explore here to find ideas for your own business!
         </p>
 
         <div className="space-y-8 md:space-y-10">
