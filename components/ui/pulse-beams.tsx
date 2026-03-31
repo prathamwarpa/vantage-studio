@@ -22,7 +22,7 @@ interface BeamPath {
     transition?: {
       duration?: number;
       repeat?: number;
-      repeatType?: string;
+      repeatType?: "loop" | "reverse" | "mirror";
       ease?: string;
       repeatDelay?: number;
       delay?: number;
@@ -95,7 +95,7 @@ const SVGs = ({ beams, width, height, baseColor, accentColor, gradientColors }: 
       xmlns="http://www.w3.org/2000/svg"
       className="flex flex-shrink-0"
     >
-      {beams.map((beam, index) => (
+      {beams.map((beam: any, index: number) => (
         <React.Fragment key={index}>
           <path
             d={beam.path}
@@ -122,7 +122,7 @@ const SVGs = ({ beams, width, height, baseColor, accentColor, gradientColors }: 
       ))}
 
       <defs>
-        {beams.map((beam, index) => (
+        {beams.map((beam: any, index: number) => (
           <motion.linearGradient
             key={index}
             id={`grad${index}`}
