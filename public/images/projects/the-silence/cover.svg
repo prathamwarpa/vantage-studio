@@ -1,0 +1,22 @@
+﻿<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='840' viewBox='0 0 1200 840' fill='none'>
+  <defs>
+    <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#0d0d0f'/>
+      <stop offset='100%' stop-color='#2a2b35'/>
+    </linearGradient>
+    <radialGradient id='glow' cx='0.8' cy='0.2' r='0.9'>
+      <stop offset='0%' stop-color='#ffffff' stop-opacity='0.14'/>
+      <stop offset='100%' stop-color='#ffffff' stop-opacity='0'/>
+    </radialGradient>
+  </defs>
+  <rect width='100%' height='100%' fill='url(#bg)'/>
+  <rect width='100%' height='100%' fill='url(#glow)'/>
+  <g opacity='0.32'>
+    <line x1='0' y1='185' x2='1200' y2='185' stroke='#ffffff' stroke-opacity='0.22'/>
+    <line x1='0' y1='630' x2='1200' y2='630' stroke='#ffffff' stroke-opacity='0.18'/>
+    <line x1='240' y1='0' x2='240' y2='840' stroke='#ffffff' stroke-opacity='0.12'/>
+    <line x1='936' y1='0' x2='936' y2='840' stroke='#ffffff' stroke-opacity='0.1'/>
+  </g>
+  <text x='6%' y='74%' fill='#ffffff' fill-opacity='0.92' font-family='Inter, Arial, sans-serif' font-size='41' letter-spacing='1.5'>THE SILENCE</text>
+  <text x='6%' y='82%' fill='#ffffff' fill-opacity='0.62' font-family='Inter, Arial, sans-serif' font-size='18' letter-spacing='2'>PROJECT COVER</text>
+</svg>
