@@ -1,9 +1,10 @@
 import { BackgroundPaths } from "@/components/ui/background-paths"
+import { FeatureSpotlight } from "@/components/feature-spotlight"
 import { PhilosophySection } from "@/components/philosophy-section"
 import { TestimonialsSection } from "@/components/testimonials-with-marquee"
 import { SpecialText } from "@/components/ui/special-text"
 import { HeroContent } from "@/components/hero-content"
-import { projects } from "@/lib/projects"
+import { featuredProjects } from "@/lib/projects"
 import Link from "next/link"
 
 const services = [
@@ -157,24 +158,24 @@ export default function Page() {
           <section id="work" className="mx-auto w-full max-w-[1280px] bg-black px-5 py-16 md:px-8 md:py-24">
             <div className="mb-12 flex items-center justify-between">
               <h2 className="text-2xl font-bold uppercase tracking-tight text-white md:text-4xl">
-                All Projects
+                Selected Projects
               </h2>
-              <p className="text-xs tracking-[0.2em] text-zinc-400">{`01 — ${String(projects.length).padStart(2, "0")}`}</p>
+              <p className="text-xs tracking-[0.2em] text-zinc-400">{`01 — ${String(featuredProjects.length).padStart(2, "0")}`}</p>
             </div>
 
-            <div className="space-y-6">
-              {projects.map((project) => (
-                <article key={project.slug} className="border border-white/10 p-5 md:p-6">
-                  <h3 className="text-2xl font-bold text-white md:text-3xl">{project.title}</h3>
-                  <p className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300 md:text-base">
-                    {project.summary}
-                  </p>
-                  <Link
+            <div className="space-y-8 md:space-y-10">
+              {featuredProjects.map((project, index) => (
+                <article key={project.title} className="w-full">
+                  <FeatureSpotlight
+                    src={project.image}
+                    alt={project.title}
                     href={project.href}
-                    className="mt-4 inline-block text-xs tracking-[0.18em] text-zinc-100 underline underline-offset-4 transition hover:text-white"
-                  >
-                    VISIT WEBSITE
-                  </Link>
+                    indexLabel={String(index + 1).padStart(2, "0")}
+                    heading={project.title}
+                    subheading={`${project.meta} • ${project.year}`}
+                    description={project.summary}
+                    exploreLabel="Explore Project"
+                  />
                 </article>
               ))}
             </div>
@@ -276,20 +277,15 @@ export default function Page() {
 
         {/* Footer */}
         <footer className="border-t border-white/10 bg-black">
-          <div className="mx-auto flex w-full max-w-[1280px] flex-col items-center gap-4 px-5 py-6 text-center md:flex-row md:justify-between md:gap-6 md:px-8 md:py-5 md:text-left">
+          <div className="mx-auto flex w-full max-w-[1280px] flex-col items-start gap-4 px-5 py-5 md:flex-row md:items-center md:justify-between md:gap-6 md:px-8 md:py-5">
             <p className="text-sm font-semibold tracking-[0.2em] text-white">OBSIDIAN</p>
-            <nav
-              aria-label="Social links"
-              className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] tracking-[0.2em] text-zinc-400 md:justify-start"
-            >
+            <nav aria-label="Social links" className="flex flex-wrap gap-x-6 gap-y-3 text-[11px] tracking-[0.2em] text-zinc-400">
               <a href="#">INSTAGRAM</a>
               <a href="#">LINKEDIN</a>
               <a href="#">TWITTER</a>
               <a href="#">PRIVACY</a>
             </nav>
-            <p className="text-[11px] tracking-[0.14em] text-zinc-500">
-              © 2026 OBSIDIAN GALLERY. ALL RIGHTS RESERVED.
-            </p>
+            <p className="text-[11px] tracking-[0.14em] text-zinc-500 md:text-right">© 2026 OBSIDIAN GALLERY. ALL RIGHTS RESERVED.</p>
           </div>
         </footer>
       </div>
