@@ -1,4 +1,3 @@
-import { FeatureSpotlight } from "@/components/feature-spotlight"
 import { projects } from "@/lib/projects"
 import Link from "next/link"
 
@@ -25,19 +24,19 @@ export default function ProjectsPage() {
           All the projects we have published. Explore here to find ideas for your own business!
         </p>
 
-        <div className="space-y-8 md:space-y-10">
-          {projects.map((project, index) => (
-            <article key={project.slug} className="w-full">
-              <FeatureSpotlight
-                src={project.image}
-                alt={project.title}
+        <div className="space-y-6">
+          {projects.map((project) => (
+            <article key={project.slug} className="border border-white/10 p-5 md:p-6">
+              <h2 className="text-2xl font-bold text-white md:text-3xl">{project.title}</h2>
+              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300 md:text-base">
+                {project.summary}
+              </p>
+              <Link
                 href={project.href}
-                indexLabel={String(index + 1).padStart(2, "0")}
-                heading={project.title}
-                subheading={`${project.meta} • ${project.year}`}
-                description={project.summary}
-                exploreLabel="Explore Project"
-              />
+                className="mt-4 inline-block text-xs tracking-[0.18em] text-zinc-100 underline underline-offset-4 transition hover:text-white"
+              >
+                VISIT WEBSITE
+              </Link>
             </article>
           ))}
         </div>

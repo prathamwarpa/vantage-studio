@@ -17,7 +17,7 @@ export const projects: Project[] = [
     year: "2024",
     image: "/images/projects/lumen-studio/cover.png",
     summary: "Destination storytelling and conversion-focused layout for a modern travel brand.",
-    href: "/project-lumen-studio.html",
+    href: "https://meghalaya-travel.vercel.app/",
     featured: true,
   },
   {
@@ -27,7 +27,7 @@ export const projects: Project[] = [
     year: "2024",
     image: "/images/projects/void-arch/cover.png",
     summary: "A textured brand story and visual menu journey for a design-forward cafe concept.",
-    href: "/project-void-arch.html",
+    href: "https://gobblin-cafe.vercel.app/",
     featured: true,
   },
   {
@@ -37,7 +37,7 @@ export const projects: Project[] = [
     year: "2024",
     image: "/images/projects/noir-objects/cover.png",
     summary: "Product-first information architecture designed for trust and efficient buying flow.",
-    href: "/project-noir-objects.html",
+    href: "https://www.kshetriindustries.com/",
     featured: true,
   },
   {
@@ -47,7 +47,7 @@ export const projects: Project[] = [
     year: "2024",
     image: "/images/projects/the-silence/cover.png",
     summary: "Immersive ride discovery with cinematic transitions and high-impact visual pacing.",
-    href: "/project-the-silence.html",
+    href: "https://himalayan-rentals.vercel.app/",
     featured: false,
   },
   {
@@ -57,7 +57,7 @@ export const projects: Project[] = [
     year: "2024",
     image: "/images/projects/tide-digital/cover.png",
     summary: "A clean dashboard narrative that makes complex enterprise controls feel approachable.",
-    href: "/project-tide-digital.html",
+    href: "https://kshetri-control-website.vercel.app/",
     featured: false,
   },
   {
@@ -67,7 +67,7 @@ export const projects: Project[] = [
     year: "2024",
     image: "/images/projects/facade/cover.png",
     summary: "Campaign-ready editorial framework built for seasonal storytelling and quick updates.",
-    href: "/project-facade.html",
+    href: "https://magicmountainadventures.com",
     featured: false,
   },
 ]
