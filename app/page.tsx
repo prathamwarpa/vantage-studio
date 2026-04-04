@@ -116,15 +116,12 @@ export default function Page() {
               </div>
               <ul className="border-y border-white/15">
                 {services.map((service, index) => (
-                  <li
-                    key={service.name}
-                    className="group border-b border-white/15 last:border-b-0"
-                  >
-                    <button
-                      type="button"
-                      className="w-full px-0 py-5 text-left md:py-7"
-                      aria-label={`Service ${index + 1}: ${service.name}`}
-                    >
+                  <li key={service.name} className="border-b border-white/15 last:border-b-0">
+                    <details className="group">
+                      <summary
+                        className="w-full cursor-pointer list-none px-0 py-5 text-left md:py-7 [&::-webkit-details-marker]:hidden"
+                        aria-label={`Service ${index + 1}: ${service.name}`}
+                      >
                       <div className="flex items-center gap-4 md:gap-6">
                         <span className="w-8 text-[11px] tracking-[0.2em] text-zinc-500 md:w-10">{String(index + 1).padStart(2, "0")}</span>
                         <div className="min-w-0 flex-1">
@@ -136,7 +133,7 @@ export default function Page() {
                             {service.name}
                           </SpecialText>
                         </div>
-                        <span className="text-lg text-zinc-500">→</span>
+                        <span className="text-lg text-zinc-500 transition-transform duration-300 group-open:rotate-90">→</span>
                       </div>
 
                       <div className="grid grid-cols-[1fr_auto] items-center gap-4">
@@ -144,10 +141,12 @@ export default function Page() {
                         <span className="text-[10px] tracking-[0.2em] text-zinc-600">EXPAND</span>
                       </div>
 
-                      <p className="max-h-0 overflow-hidden pr-10 text-sm leading-relaxed text-zinc-400 transition-all duration-300 group-hover:mt-3 group-hover:max-h-20 group-focus-within:mt-3 group-focus-within:max-h-20">
+                      </summary>
+
+                      <p className="max-h-0 overflow-hidden pb-0 pr-10 text-sm leading-relaxed text-zinc-400 transition-all duration-300 group-hover:mt-3 group-hover:max-h-20 group-hover:pb-5 group-open:mt-3 group-open:max-h-20 group-open:pb-5 md:group-hover:pb-7 md:group-open:pb-7">
                         {service.description}
                       </p>
-                    </button>
+                    </details>
                   </li>
                 ))}
               </ul>
