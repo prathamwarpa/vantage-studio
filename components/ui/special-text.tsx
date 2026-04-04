@@ -31,8 +31,9 @@ export function SpecialText({
   once = true,
 }: SpecialTextProps) {
   const containerRef = useRef<HTMLSpanElement>(null);
+  const [isTouchLike, setIsTouchLike] = useState(false);
   const isInView = useInView(containerRef, { once, margin: "-100px" });
-  const shouldAnimate = inView ? isInView : true;
+  const shouldAnimate = inView && !isTouchLike ? isInView : true;
   const [hasStarted, setHasStarted] = useState(() => !inView && delay <= 0);
   const text = children;
   const [displayText, setDisplayText] = useState<string>(
@@ -45,6 +46,25 @@ export function SpecialText({
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const startTimeoutRef = useRef<number | null>(null);
 
+  useEffect(() => {
+    const touchQuery = window.matchMedia("(hover: none), (pointer: coarse), (max-width: 768px)");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const updateTouchLike = () => {
+      setIsTouchLike(touchQuery.matches || reducedMotionQuery.matches);
+    };
+
+    updateTouchLike();
+
+    touchQuery.addEventListener("change", updateTouchLike);
+    reducedMotionQuery.addEventListener("change", updateTouchLike);
+
+    return () => {
+      touchQuery.removeEventListener("change", updateTouchLike);
+      reducedMotionQuery.removeEventListener("change", updateTouchLike);
+    };
+  }, []);
+
   function clearStartTimeout() {
     if (startTimeoutRef.current === null) return;
     window.clearTimeout(startTimeoutRef.current);
@@ -53,6 +73,12 @@ export function SpecialText({
 
   function startAnimation() {
     setHasStarted(true);
+    if (isTouchLike) {
+      setDisplayText(text);
+      setCurrentPhase("phase2");
+      setAnimationStep(0);
+      return;
+    }
     setDisplayText(" ".repeat(text.length));
     setCurrentPhase("phase1");
     setAnimationStep(0);
@@ -128,10 +154,10 @@ export function SpecialText({
       }, delay * 1000);
     }
     return () => clearStartTimeout();
-  }, [shouldAnimate, hasStarted, delay, text.length]);
+  }, [shouldAnimate, hasStarted, delay, text.length, isTouchLike]);
 
   useEffect(() => {
-    if (!hasStarted) {
+    if (!hasStarted || isTouchLike) {
       return;
     }
 
@@ -152,10 +178,10 @@ export function SpecialText({
         clearInterval(intervalRef.current);
       }
     };
-  }, [currentPhase, animationStep, text, speed, hasStarted]);
+  }, [currentPhase, animationStep, text, speed, hasStarted, isTouchLike]);
 
   useEffect(() => {
-    if (hasStarted) {
+    if (hasStarted && !isTouchLike) {
       setDisplayText(" ".repeat(text.length));
       setCurrentPhase("phase1");
       setAnimationStep(0);
@@ -167,12 +193,13 @@ export function SpecialText({
         clearInterval(intervalRef.current);
       }
     };
-  }, [text, hasStarted]);
+  }, [text, hasStarted, isTouchLike]);
 
   return (
     <span
       ref={containerRef}
-      className={`h-4.5 leading-5 inline-flex font-mono font-medium ${className}`}
+      aria-label={text}
+      className={`inline-block whitespace-pre align-baseline font-mono font-medium leading-none ${className}`}
     >
       {displayText}
     </span>
