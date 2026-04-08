@@ -179,9 +179,7 @@ export function FeatureSpotlight({
             className="h-full w-full object-cover transition-all duration-1000"
             style={{
               transform: isHovered ? "scale(1.1)" : "scale(1)",
-              filter: isHovered
-                ? "grayscale(0%) saturate(1.3) contrast(1.18) brightness(1.06)"
-                : "grayscale(100%) saturate(0.55) contrast(1.08) brightness(0.72)",
+              filter: isHovered ? "saturate(1.08) contrast(1.08) brightness(1.04)" : "none",
               transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
             }}
           />

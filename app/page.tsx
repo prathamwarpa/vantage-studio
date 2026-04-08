@@ -1,3 +1,5 @@
+"use client"
+
 import { BackgroundPaths } from "@/components/ui/background-paths"
 import { FeatureSpotlight } from "@/components/feature-spotlight"
 import { PhilosophySection } from "@/components/philosophy-section"
@@ -6,6 +8,28 @@ import { SpecialText } from "@/components/ui/special-text"
 import { HeroContent } from "@/components/hero-content"
 import { featuredProjects } from "@/lib/projects"
 import Link from "next/link"
+
+const whatsappNumber = "917876261496"
+
+function buildWhatsAppUrl(formData: FormData) {
+  const name = String(formData.get("name") ?? "")
+  const phone = String(formData.get("phone") ?? "")
+  const service = String(formData.get("service") ?? "")
+  const message = String(formData.get("message") ?? "")
+
+  const text = [
+    "New inquiry from the website",
+    `Name: ${name}`,
+    `Phone: ${phone}`,
+    `Project Type: ${service || "Not selected"}`,
+    "Message:",
+    message,
+  ]
+    .filter(Boolean)
+    .join("\n")
+
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`
+}
 
 const services = [
   {
@@ -66,6 +90,16 @@ const testimonials = [
 ]
 
 export default function Page() {
+  function handleInquirySubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    const formData = new FormData(event.currentTarget)
+    const whatsappUrl = buildWhatsAppUrl(formData)
+
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer")
+    event.currentTarget.reset()
+  }
+
   return (
     <div className="min-h-screen bg-black text-zinc-100">
       <div className="relative z-10">
@@ -214,9 +248,7 @@ export default function Page() {
               <div className="md:col-span-7">
                 <form
                   className="grid gap-4 border border-white/12 bg-zinc-950 p-5 md:grid-cols-2 md:p-6"
-                  action="mailto:hello@obsidian.gallery"
-                  method="post"
-                  encType="text/plain"
+                  onSubmit={handleInquirySubmit}
                 >
                   <label className="flex flex-col gap-2 text-xs tracking-[0.12em] text-zinc-400">
                     NAME
@@ -228,10 +260,10 @@ export default function Page() {
                     />
                   </label>
                   <label className="flex flex-col gap-2 text-xs tracking-[0.12em] text-zinc-400">
-                    EMAIL
+                    PHONE NUMBER
                     <input
-                      type="email"
-                      name="email"
+                      type="tel"
+                      name="phone"
                       required
                       className="border border-white/20 bg-black px-3 py-3 text-sm text-white outline-none"
                     />
@@ -276,15 +308,10 @@ export default function Page() {
 
         {/* Footer */}
         <footer className="border-t border-white/10 bg-black">
-          <div className="mx-auto flex w-full max-w-[1280px] flex-col items-start gap-4 px-5 py-5 md:flex-row md:items-center md:justify-between md:gap-6 md:px-8 md:py-5">
-            <p className="text-sm font-semibold tracking-[0.2em] text-white">OBSIDIAN</p>
-            <nav aria-label="Social links" className="flex flex-wrap gap-x-6 gap-y-3 text-[11px] tracking-[0.2em] text-zinc-400">
+          <div className="mx-auto flex w-full max-w-[1280px] items-center px-5 py-5 md:px-8 md:py-5">
+            <nav aria-label="Social links" className="text-[11px] tracking-[0.2em] text-zinc-400">
               <a href="#">INSTAGRAM</a>
-              <a href="#">LINKEDIN</a>
-              <a href="#">TWITTER</a>
-              <a href="#">PRIVACY</a>
             </nav>
-            <p className="text-[11px] tracking-[0.14em] text-zinc-500 md:text-right">© 2026 OBSIDIAN GALLERY. ALL RIGHTS RESERVED.</p>
           </div>
         </footer>
       </div>
